@@ -1,8 +1,14 @@
 import pandas as pd
-import boto3
+import os, shutil
 
-def load(input_file: str, bucket_name: str, s3_key: str) -> None:
-    print("Loading data to S3...")
-    s3 = boto3.client('s3')
-    s3.upload_file(input_file, bucket_name, s3_key)
-    print(f"Data loaded to S3 bucket '{bucket_name}' with key '{s3_key}'")
+def load(input_file: str, output_file:str) -> None:
+    print("Copying file from input to output folder...")
+
+    # Ensure the output directory exists
+    output_dir = os.path.dirname(output_file)
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Copy the file
+    shutil.copy(input_file, output_file)
+
+    print(f"File copied to '{output_file}'")

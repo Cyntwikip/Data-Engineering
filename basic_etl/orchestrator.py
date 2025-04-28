@@ -10,8 +10,7 @@ load_dotenv()
 SOURCE_URL = os.getenv("SOURCE_URL")
 RAW_FILE = os.getenv("RAW_FILE")
 PROCESSED_FILE = os.getenv("PROCESSED_FILE")
-BUCKET_NAME = os.getenv("BUCKET_NAME")
-S3_KEY = os.getenv("S3_KEY")
+OUTPUT_FILE = os.getenv("OUTPUT_FILE")
 
 def main():
     # Extract raw data
@@ -21,7 +20,7 @@ def main():
     transform(RAW_FILE, PROCESSED_FILE)
     
     # Load processed data to S3
-    load(PROCESSED_FILE, BUCKET_NAME, S3_KEY)
+    load(PROCESSED_FILE, OUTPUT_FILE)
 
 if __name__ == "__main__":
     main()
