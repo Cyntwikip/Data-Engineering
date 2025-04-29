@@ -50,3 +50,7 @@ crontab -l
   ```
 - Use absolute paths in `job.sh` to avoid issues with relative paths.
 
+- Ensure that `crontab` has access to the file. On macOS (e.g., macOS Sequoia), `crontab` does not have access to folders or files by default. You need to grant access explicitly in the **System Settings**:
+1. Go to **System Settings** > **Privacy & Security** > **Full Disk Access**.
+2. Add your terminal application (e.g., Terminal, iTerm) to the list.
+3. Restart the terminal and reconfigure your `crontab` if necessary.
