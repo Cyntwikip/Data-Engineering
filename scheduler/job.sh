@@ -1,5 +1,7 @@
 #!/bin/bash
 
+cd ~/Documents/Github/Data-Engineering/scheduler/
+
 # Log file path
 LOG_FILE="etl_pipeline.log"
 
@@ -11,6 +13,9 @@ ORIGINAL_DIR=$(pwd)
 
 # Change to the directory containing orchestrator.py
 cd ../basic_etl
+
+# Activate the conda base environment
+source ~/anaconda3/bin/activate base
 
 # Run the ETL pipeline
 python3 orchestrator.py
