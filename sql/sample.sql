@@ -14,6 +14,9 @@ $$;
 --\connect data_eng_db user=postgres host=localhost port=5432
 \c data_eng_db
 
+-- Drop the customers table if it exists
+DROP TABLE IF EXISTS customers;
+
 -- Create the customers table
 CREATE TABLE customers (
     customer_id SERIAL PRIMARY KEY,
@@ -24,6 +27,9 @@ CREATE TABLE customers (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Drop the products table if it exists
+DROP TABLE IF EXISTS products;
+
 -- Create the products table
 CREATE TABLE products (
     product_id SERIAL PRIMARY KEY,
@@ -33,13 +39,16 @@ CREATE TABLE products (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- Drop the transactions table if it exists
+DROP TABLE IF EXISTS transactions;
+
 -- Create the transactions table
 CREATE TABLE transactions (
     transaction_id SERIAL PRIMARY KEY,
     customer_id INT NOT NULL,
     product_id INT NOT NULL,
     quantity INT NOT NULL,
-    total_price NUMERIC(10, 2) GENERATED ALWAYS AS (quantity * price) STORED,
+    total_price NUMERIC(10, 2) NOT NULL,
     transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (customer_id) REFERENCES customers(customer_id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
