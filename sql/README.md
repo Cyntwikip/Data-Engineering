@@ -118,3 +118,39 @@ Here are some useful commands to use within the `psql` interactive terminal:
    psql -U postgres -d data_eng_db
    SELECT * FROM customers;
    ```
+
+---
+
+### Using Python to Read PostgreSQL Tables
+
+You can use the provided Python script (`read_psql.py`) to connect to your PostgreSQL database and read data from the tables.
+
+#### Prerequisites
+1. Install the `psycopg2` library:
+   ```bash
+   pip install psycopg2
+   ```
+2. Update the database credentials in the script:
+   - Replace `your_database_name`, `your_username`, and `your_password` with your PostgreSQL details.
+
+#### Running the Script
+1. Save the script as `read_psql.py`.
+2. Run the script:
+   ```bash
+   python read_psql.py
+   ```
+3. The script will display the contents of the `customers`, `products`, and `transactions` tables.
+
+#### Example Output
+```plaintext
+Customers Table:
+(1, 'John', 'Doe', 'john.doe@example.com')
+
+Products Table:
+(1, 'Laptop', 999.99)
+
+Transactions Table:
+(1, 1, 1, 1, 999.99, '2023-10-01 12:00:00')
+```
+
+Make sure your PostgreSQL server is running and the tables are populated with data before executing the script.
