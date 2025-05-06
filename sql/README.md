@@ -154,3 +154,88 @@ Transactions Table:
 ```
 
 Make sure your PostgreSQL server is running and the tables are populated with data before executing the script.
+
+---
+
+### Quick Introduction to JOINs and CTEs
+
+#### JOINs
+A **JOIN** in SQL is used to combine rows from two or more tables based on a related column. Common types of JOINs include:
+- **INNER JOIN**: Returns rows with matching values in both tables.
+- **LEFT JOIN**: Returns all rows from the left table and matching rows from the right table.
+- **RIGHT JOIN**: Returns all rows from the right table and matching rows from the left table.
+
+Example:
+```sql
+SELECT customers.first_name, products.product_name
+FROM transactions
+JOIN customers ON transactions.customer_id = customers.customer_id
+JOIN products ON transactions.product_id = products.product_id;
+```
+
+#### Common Table Expressions (CTEs)
+A **CTE** is a temporary result set defined within a SQL query. It improves readability and can be reused within the query.
+
+Example:
+```sql
+WITH customer_sales AS (
+    SELECT customer_id, SUM(quantity) AS total_quantity
+    FROM transactions
+    GROUP BY customer_id
+)
+SELECT c.first_name, cs.total_quantity
+FROM customers c
+JOIN customer_sales cs ON c.customer_id = cs.customer_id;
+```
+
+CTEs are especially useful for breaking down complex queries into smaller, manageable parts.
+
+---
+
+### Using JOIN and CTE in SQL with Python
+
+The `read_join_psql.py` script demonstrates how to use a Common Table Expression (CTE) and a JOIN to fetch aggregated data from a PostgreSQL database.
+
+#### SQL Query Explanation
+The script uses the following SQL query:
+```sql
+WITH customer_sales AS (
+    SELECT
+        customer_id,
+        SUM(quantity) AS total_quantity
+    FROM transactions
+    GROUP BY customer_id
+)
+SELECT
+    c.customer_id,
+    c.first_name,
+    c.last_name,
+    cs.total_quantity
+FROM customers c
+JOIN customer_sales cs
+ON c.customer_id = cs.customer_id;
+```
+
+1. **CTE (`customer_sales`)**:
+   - Aggregates the total quantity of products purchased by each customer from the `transactions` table.
+2. **JOIN**:
+   - Combines the `customers` table with the aggregated data (`customer_sales`) using the `customer_id` column.
+
+#### Running the Script
+1. Ensure the database is populated with the required tables and sample data.
+2. Run the script:
+   ```bash
+   python read_join_psql.py
+   ```
+
+#### Example Output
+```plaintext
+Customer Sales:
+Customer ID: 1, Name: John Doe, Total Quantity: 5
+Customer ID: 2, Name: Jane Smith, Total Quantity: 7
+Customer ID: 3, Name: Alice Johnson, Total Quantity: 7
+```
+
+This script is useful for analyzing customer purchase behavior by combining and aggregating data from multiple tables.
+
+---

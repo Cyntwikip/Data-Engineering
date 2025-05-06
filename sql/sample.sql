@@ -65,12 +65,23 @@ INSERT INTO products (product_name, price, stock) VALUES
 ('Laptop', 999.99, 10),
 ('Smartphone', 499.99, 20),
 ('Headphones', 49.99, 50);
+('Tablet', 299.99, 15),
+('Monitor', 199.99, 25);
 
 -- Insert sample data into transactions
 INSERT INTO transactions (customer_id, product_id, quantity, total_price) VALUES
 (1, 1, 1, 999.99), -- John Doe buys 1 Laptop
 (2, 2, 2, 999.98), -- Jane Smith buys 2 Smartphones
-(3, 3, 3, 149.97); -- Alice Johnson buys 3 Headphones
+(3, 3, 3, 149.97), -- Alice Johnson buys 3 Headphones
+(1, 4, 1, 299.99), -- John Doe buys 1 Tablet
+(2, 5, 1, 199.99), -- Jane Smith buys 1 Monitor
+(3, 1, 1, 999.99), -- Alice Johnson buys 1 Laptop
+(1, 3, 2, 99.98),  -- John Doe buys 2 Headphones
+(2, 4, 1, 299.99), -- Jane Smith buys 1 Tablet
+(3, 5, 2, 399.98), -- Alice Johnson buys 2 Monitors
+(1, 2, 1, 499.99), -- John Doe buys 1 Smartphone
+(2, 3, 3, 149.97), -- Jane Smith buys 3 Headphones
+(3, 4, 1, 299.99); -- Alice Johnson buys 1 Tablet
 
 -- Query to verify the data
 SELECT * FROM customers;
