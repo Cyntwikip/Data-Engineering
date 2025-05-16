@@ -23,6 +23,15 @@ pip install "apache-airflow[celery]==3.0.0" --constraint "https://raw.githubuser
 
 ## Configuration
 
+Set the AIRFLOW_HOME Environment Variable
+Before running Airflow, set the AIRFLOW_HOME environment variable to specify the directory where Airflow will store its configuration and data:
+
+```ini
+export AIRFLOW_HOME=~/airflow
+```
+
+You can run this line in your shell/terminal.
+
 ### Modify `airflow.cfg`
 
 1. Update the `auth_manager` setting in your `airflow.cfg` file to use the FAB (Flask App Builder) authentication manager:
