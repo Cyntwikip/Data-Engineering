@@ -45,6 +45,26 @@ You can run this line in your shell/terminal.
    simple_auth_manager_all_admins = True
    ```
 
+3. Add the following dag_bundle_config_list configuration to include multiple DAG folders to `airflow.cfg`:
+   ```ini
+   dag_bundle_config_list = [
+      {
+      "name": "dags-folder",
+      "classpath": "airflow.dag_processing.bundles.local.LocalDagBundle",
+      "kwargs": {}
+      },
+      {
+      "name": "data-engineering-dags-folder",
+      "classpath": "airflow.dag_processing.bundles.local.LocalDagBundle",
+      "kwargs": {
+            "path": "<REPOSITORY>/Data-Engineering/"
+      }
+      }
+   ]
+   ```
+
+   Replace <REPOSITORY> with the absolute path to your repository.
+
 ---
 
 ## User Management
