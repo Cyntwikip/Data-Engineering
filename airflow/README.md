@@ -101,6 +101,75 @@ less $AIRFLOW_HOME/simple_auth_manager_passwords.json.generated
 
 ---
 
+## Basic Airflow Syntax Guide
+
+This section provides a quick overview of Airflow syntax, based on the `airflow_etl.py` example.
+
+### 1. Importing Required Modules
+Airflow requires importing the `DAG` class and operators for defining tasks:
+```python
+from airflow import DAG
+from airflow.providers.standard.operators.bash import BashOperator
+from airflow.providers.standard.operators.python import PythonOperator
+from datetime import datetime
+```
+
+### 2. Defining the DAG
+The `DAG` object defines the workflow. Key parameters include:
+- `dag_id`: A unique identifier for the DAG.
+- `start_date`: The date when the DAG starts running.
+- `schedule`: The schedule for running the DAG (e.g., daily, hourly).
+- `catchup`: Whether to backfill missed runs.
+
+Example:
+```python
+with DAG(
+    'etl_dag',
+    start_date=datetime(2025, 5, 1),
+    schedule=None,
+    catchup=False
+) as dag:
+    ...
+```
+
+### 3. Creating Tasks
+Tasks are defined using operators. For example:
+- **BashOperator**: Executes shell commands.
+- **PythonOperator**: Executes Python functions.
+
+#### Example: BashOperator
+```python
+ensure_directories_op = BashOperator(
+    task_id='ensure_directories_task',
+    bash_command='mkdir -p /path/to/output /path/to/raw /path/to/processed'
+)
+```
+
+#### Example: PythonOperator
+```python
+def extract_task():
+    extract(SOURCE_URL, RAW_FILE)
+
+extract_op = PythonOperator(
+    task_id='extract_task',
+    python_callable=extract_task
+)
+```
+
+### 4. Setting Task Dependencies
+Define the order of execution using the `>>` operator:
+```python
+ensure_directories_op >> extract_op >> transform_op >> load_op
+```
+
+### 5. Running the DAG
+To trigger the DAG manually:
+```bash
+airflow dags trigger etl_dag
+```
+
+---
+
 ## Notes
 
 - If you encounter issues with authentication, ensure that the `auth_manager` setting in `airflow.cfg` matches your desired authentication method.
