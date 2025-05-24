@@ -16,7 +16,8 @@ Welcome to the **Data Engineering** repository! This repository contains materia
    - SFTP Integration
    - ETL Pipeline Orchestrator
    - Streamlit Dashboard
-5. How to Use This Repository
+5. Infrastructure
+6. How to Use This Repository
 
 ---
 
@@ -89,6 +90,34 @@ Build interactive dashboards to visualize data insights. Topics include:
 - [Setting up a Streamlit app](./streamlit)
 - Connecting the dashboard to ETL pipelines
 - Visualizing data with charts and tables
+
+---
+
+### Infrastructure (Docker and Terraform)
+
+This section focuses on infrastructure tools like Docker and Terraform, which are essential for automating and managing data engineering workflows. **Note: This section is a work in progress.**
+
+#### 1. Docker
+Docker is a platform that allows you to package applications and their dependencies into lightweight, portable containers. It is widely used in data engineering for:
+- Running ETL pipelines in isolated environments.
+- Deploying workflow orchestration tools like Apache Airflow.
+- Managing dependencies for data processing frameworks.
+
+Topics covered:
+- [Setting up a Dockerfile](./docker)
+- Building and running Docker containers
+- Using Docker Compose for multi-container setups
+
+#### 2. Terraform
+Terraform is an Infrastructure as Code (IaC) tool that allows you to define and provision cloud resources in a declarative way. It is useful for:
+- Automating the creation of data lakes, data warehouses, and other cloud resources.
+- Managing infrastructure for ETL pipelines.
+- Scaling resources for large-scale data processing.
+
+Topics covered:
+- [Basic Terraform setup](./terraform)
+- Provisioning cloud resources (e.g., AWS S3, Redshift)
+- Managing infrastructure as code
 
 ---
 
