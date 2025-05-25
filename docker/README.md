@@ -104,6 +104,36 @@ This will give you a shell inside the container.
 
 ---
 
+## Example: Docker for Streamlit App
+
+You can also use Docker to containerize and run a Streamlit app. Follow these steps using the Docker terminal:
+
+1. **Navigate to the Directory**:  
+   Open your Docker terminal and go to the directory containing your `Dockerfile` and Streamlit app (e.g., `app.py`).
+
+2. **Build the Docker Image**:  
+   In the Docker terminal, run the following command to build the Docker image:
+   ```bash
+   docker build -t streamlit-app -f Dockerfile .
+   ```
+
+   - `-t streamlit-app`: Tags the image with the name `streamlit-app`.
+   - `-f Dockerfile`: Specifies the Dockerfile to use.
+
+3. **Run the Docker Container**:
+   Run the container and map port `8600` on your host to port `8600` in the container:
+   ```bash
+   docker run -p 8600:8600 --rm streamlit-app
+   ```
+
+   - `-p 8600:8600`: Maps port 8600 on the host to port 8600 in the container.
+   - `--rm`: Automatically removes the container after it stops.
+
+4. **Access the App**:
+   Open your browser and go to [http://localhost:8600](http://localhost:8600).
+
+---
+
 ## Example Directory Structure
 
 Here’s an example of how your project directory might look:
@@ -112,14 +142,14 @@ Here’s an example of how your project directory might look:
 project/
 ├── Dockerfile
 ├── requirements.txt
-├── sftp_extract.py
+├── app.py
 └── .env
 ```
 
 - **`Dockerfile`**: Defines the Docker image.
-- **`requirements.txt`**: Lists Python dependencies (e.g., `paramiko`, `python-dotenv`).
-- **`sftp_extract.py`**: Your Python script.
-- **`.env`**: Contains environment variables for SFTP credentials.
+- **`requirements.txt`**: Lists Python dependencies (e.g., `streamlit`).
+- **`app.py`**: Your Streamlit app script.
+- **`.env`**: (Optional) Contains environment variables.
 
 ---
 
@@ -156,5 +186,3 @@ project/
 
 - [Docker Documentation](https://docs.docker.com/)
 - [Dockerfile Reference](https://docs.docker.com/engine/reference/builder/)
-
----
